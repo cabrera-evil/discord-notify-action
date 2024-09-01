@@ -1,6 +1,9 @@
 name: 'Discord Notify Action'
 description: 'Send a message to a Discord channel.'
 author: cabrera-evil
+branding:
+  icon: 'message-circle'
+  color: 'black'
 inputs:
   message:
     description: 'The message to send.'
