@@ -1,0 +1,12 @@
+name: 'Discord Notify Action'
+description: 'Send a message to a Discord channel.'
+author: cabrera-evil
+inputs:
+  message:
+    description: 'The message to send.'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.message }}

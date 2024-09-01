@@ -1,0 +1,26 @@
+name: Discord Notify
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  raw-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: cabrera-evil/discord-notify-action@master
+        with:
+          message: 'A new commit has been pushed to cabrera-evil/discord-notify-action.'
+
+  embed-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_EMBEDS: '{"title": "New commit", "description": "A new commit has been pushed to cabrera-evil/discord-notify-action."}'
+        uses: cabrera-evil/discord-notify-action@master
