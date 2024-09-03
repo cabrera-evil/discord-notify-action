@@ -5,11 +5,52 @@ branding:
   icon: 'message-circle'
   color: 'black'
 inputs:
-  message:
-    description: 'The message to send.'
+  webhook_url:
+    description: 'Webhook URL from Discord'
+    required: true
+    default: ''
+  title:
+    description: 'Title for card'
     required: false
+    default: ''
+  message:
+    description: 'Content of card'
+    required: true
+    default: ''
+  include_image:
+    description: 'If action is used in a pull request, attach the preview image for it to the card. Required for custom_image_url'
+    required: false
+    default: 'false'
+  avatar_url:
+    description: 'Avatar to use for user'
+    required: false
+    default: ''
+  username:
+    description: 'Username to send message as'
+    required: false
+    default: 'GitHub'
+  color:
+    description: 'Color for the edge of the card in hex'
+    required: false
+    default: '#3371FF'
+  custom_image_url:
+    description: 'Include custom image on card, include_image must be true'
+    required: false
+    default: ''
+  title_url:
+    description: 'Make the title of the card a link'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.message }}
+    - ${{inputs.webhook_url}}
+    - ${{inputs.title}}
+    - ${{inputs.message}}
+    - ${{inputs.include_image}}
+    - ${{inputs.avatar_url}}
+    - ${{inputs.username}}
+    - ${{inputs.color}}
+    - ${{inputs.custom_image_url}}
+    - ${{inputs.title_url}}
