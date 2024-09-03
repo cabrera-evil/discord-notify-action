@@ -1,6 +1,7 @@
+import { TEmbed } from './embed.type';
+
 export interface TDiscordMessage {
-  content?: string;
-  embeds?: any;
+  embeds?: TEmbed;
   username?: string;
   avatar_url?: string;
 }

@@ -8,8 +8,6 @@ Welcome to the **Discord Notify Action** project repository. This project provid
   - [Table of Contents](#table-of-contents)
   - [Usage](#usage)
   - [Arguments](#arguments)
-  - [Examples](#examples)
-  - [Environment Variables](#environment-variables)
   - [License](#license)
   - [Contributing](#contributing)
 
@@ -20,48 +18,33 @@ To use this GitHub Action in your workflows, include the following step in your 
 For a raw message:
 
 ```yaml
-raw-message:
+notify:
   runs-on: ubuntu-latest
   steps:
     - name: Discord notification
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      uses: cabrera-evil/discord-notify-action@master
+      uses: cabrera-evil/discord-notify-action@1.0.1
       with:
-        message: 'A new commit has been pushed to cabrera-evil/discord-notify-action.'
-```
-
-For an embed message:
-
-```yaml
-embed-message:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Discord notification
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        DISCORD_EMBEDS: '{"title": "New commit", "description": "A new commit has been pushed to cabrera-evil/discord-notify-action."}'
-      uses: cabrera-evil/discord-notify-action@master
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+        title: 'GitHub Action'
+        description: 'A new commit has been pushed.'
+        include_image: 'true'
+        username: 'GitHub'
+        title_url: 'https://github.com/${{ github.repository }}/commit/${{ github.sha }}'
 ```
 
 ## Arguments
 
-The action sends a notification with event information by default. You can override the default message by providing a custom message through the `message` input.
+The following arguments can be configured:
 
-## Examples
-
-Here are some example `message` values you can use:
-
-- `message = "The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed."`
-
-## Environment Variables
-
-The following environment variables can be configured:
-
-- **`DISCORD_WEBHOOK`** (**required**): The [Discord Webhook URL](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
-- **`DISCORD_USERNAME`** (_optional_): Overrides the bot's username in the notification.
-- **`DISCORD_AVATAR`** (_optional_): Overrides the bot's avatar image URL.
-- **`DISCORD_EMBEDS`** (_optional_): A valid JSON string of an array of Discord embed objects. For more information, refer to the [Discord Webhook Embeds Documentation](https://birdie0.github.io/discord-webhooks-guide/structure/embeds.html).
+- **`webhook_url`** (**required**): The [Discord Webhook URL](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
+- **`title`** (_optional_): The title of the notification.
+- **`description`** (_optional_): The description of the notification.
+- **`include_image`** (_optional_): A boolean value to include an image in the notification.
+- **`avatar_url`** (_optional_): The URL of the avatar image to use in the notification.
+- **`username`** (_optional_): The username to use in the notification.
+- **`color`** (_optional_): The color of the notification.
+- **`custom_image_url`** (_optional_): The URL of a custom image to include in the notification.
+- **`title_url`** (_optional_): The URL to link the title to.
 
 ## License
 
