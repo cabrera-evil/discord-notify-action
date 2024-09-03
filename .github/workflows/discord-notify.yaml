@@ -2,21 +2,19 @@ name: Discord Notify
 
 on:
   push:
-    branches:
-      - feature/embed-message-params
+    tags:
+      - '1.0.1'
 
 jobs:
-  action:
+  notify:
     runs-on: ubuntu-latest
     steps:
       - name: Discord notification
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: cabrera-evil/discord-notify-action@feature/embed-message-params
+        uses: cabrera-evil/discord-notify-action@1.0.1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: 'GitHub Action'
-          description: 'A new commit has been pushed to the master branch.'
+          description: 'A new commit has been pushed.'
           include_image: 'true'
           username: 'GitHub'
           title_url: 'https://github.com/${{ github.repository }}/commit/${{ github.sha }}'

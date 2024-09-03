@@ -1,6 +1,6 @@
 {
   "name": "discord-notify-action",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "GitHub Action that send a message to a Discord channel.",
   "keywords": [

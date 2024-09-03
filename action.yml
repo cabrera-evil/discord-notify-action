@@ -32,7 +32,7 @@ inputs:
   color:
     description: 'Color for the edge of the card in hex'
     required: false
-    default: '#3371FF'
+    default: '#24292e'
   custom_image_url:
     description: 'Include custom image on card, include_image must be true'
     required: false
