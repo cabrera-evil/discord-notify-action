@@ -43,7 +43,7 @@ inputs:
     default: ''
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://cabreraevil/discord-notify-action:1.0.2'
   args:
     - ${{inputs.webhook_url}}
     - ${{inputs.title}}

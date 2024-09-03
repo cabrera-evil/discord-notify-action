@@ -3,14 +3,14 @@ name: Discord Notify
 on:
   push:
     tags:
-      - '1.0.1'
+      - '1.0.2'
 
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
       - name: Discord notification
-        uses: cabrera-evil/discord-notify-action@1.0.1
+        uses: cabrera-evil/discord-notify-action@1.0.2
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: 'GitHub Action'
