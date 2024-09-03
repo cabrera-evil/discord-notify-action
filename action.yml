@@ -6,15 +6,15 @@ branding:
   color: 'black'
 inputs:
   webhook_url:
-    description: 'Webhook URL from Discord'
+    description: 'Discord webhook URL'
     required: true
     default: ''
   title:
-    description: 'Title for card'
+    description: 'Message title'
     required: false
     default: ''
-  message:
-    description: 'Content of card'
+  description:
+    description: 'Message description'
     required: true
     default: ''
   include_image:
@@ -22,11 +22,11 @@ inputs:
     required: false
     default: 'false'
   avatar_url:
-    description: 'Avatar to use for user'
+    description: 'Custom avatar image URL'
     required: false
-    default: ''
+    default: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
   username:
-    description: 'Username to send message as'
+    description: 'Custom username'
     required: false
     default: 'GitHub'
   color:
@@ -47,7 +47,7 @@ runs:
   args:
     - ${{inputs.webhook_url}}
     - ${{inputs.title}}
-    - ${{inputs.message}}
+    - ${{inputs.description}}
     - ${{inputs.include_image}}
     - ${{inputs.avatar_url}}
     - ${{inputs.username}}

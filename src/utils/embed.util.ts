@@ -3,22 +3,15 @@ import { TEmbed } from '..//types/embed.type';
 
 export function createEmbed({
   title,
-  message,
+  description,
   color,
   titleUrl,
   includeImage,
   customImageUrl,
-}: {
-  title: string;
-  message: string;
-  color: string;
-  titleUrl?: string;
-  includeImage: boolean;
-  customImageUrl?: string;
 }): TEmbed {
   const embed: TEmbed = {
     title,
-    description: message,
+    description,
     color: parseInt(color.replace('#', ''), 16),
     url: titleUrl || undefined,
     image: includeImage

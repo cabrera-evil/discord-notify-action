@@ -11,7 +11,7 @@ export async function main() {
     const discordService = DiscordService.getInstance();
     const webhookUrl = core.getInput('webhook_url', { required: true });
     const title = core.getInput('title');
-    const message = core.getInput('message');
+    const description = core.getInput('description');
     const avatarUrl = core.getInput('avatar_url');
     const username = core.getInput('username');
     const color = core.getInput('color') || '#000000';
@@ -20,7 +20,7 @@ export async function main() {
     const titleUrl = core.getInput('title_url');
     const embed = createEmbed({
       title,
-      message,
+      description,
       color,
       titleUrl,
       includeImage,

@@ -11,22 +11,6 @@ jest.mock('../src/services/discord.service', () => ({
 }));
 
 describe('main function tests', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-    process.env = {
-      WEBHOOK_URL: 'https://discord.com/api/webhooks/test',
-      TITLE: 'Test Notification',
-      MESSAGE: 'This is a test message',
-      AVATAR_URL: 'https://example.com/avatar.png',
-      USERNAME: 'Test User',
-      COLOR: '#FF5733',
-      INCLUDE_IMAGE: 'true',
-      CUSTOM_IMAGE_URL: 'https://example.com/custom-image.png',
-      TITLE_URL: 'https://example.com',
-      EVENT_NAME: 'test_event',
-    };
-  });
-
   it('should send a Discord notification successfully', async () => {
     await main();
     expect(getInput).toHaveBeenCalledWith('webhook_url', { required: true });

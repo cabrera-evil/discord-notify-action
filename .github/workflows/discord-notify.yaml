@@ -6,21 +6,17 @@ on:
       - master
 
 jobs:
-  raw-message:
+  action:
     runs-on: ubuntu-latest
     steps:
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: cabrera-evil/discord-notify-action@master
+        uses: cabrera-evil/discord-notify-action@feature/embed-message-params
         with:
-          message: 'A new commit has been pushed to cabrera-evil/discord-notify-action.'
-
-  embed-message:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Discord notification
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '{"title": "New commit", "description": "A new commit has been pushed to cabrera-evil/discord-notify-action."}'
-        uses: cabrera-evil/discord-notify-action@master
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: 'GitHub Action'
+          description: 'A new commit has been pushed to the master branch.'
+          include_image: 'true'
+          username: 'GitHub'
+          title_url: 'https://github.com/${{ github.repository }}/commit/${{ github.sha }}'
