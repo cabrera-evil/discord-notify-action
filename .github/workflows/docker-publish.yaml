@@ -9,7 +9,7 @@ on:
     types: [created]
 
 jobs:
-  build:
+  publish:
     name: Build and Push Docker Images
     runs-on: ubuntu-latest
 

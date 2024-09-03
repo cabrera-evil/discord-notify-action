@@ -9,9 +9,8 @@ Welcome to the **Discord Notify Action** project repository. This document provi
   - [Prerequisites](#prerequisites)
   - [Initial Setup](#initial-setup)
     - [1. Clone the Repository](#1-clone-the-repository)
-    - [2. Configure Environment Variables](#2-configure-environment-variables)
-    - [3. Build and Start the Project](#3-build-and-start-the-project)
-    - [4. Stopping the Services](#4-stopping-the-services)
+    - [2. Build and Start the Project](#2-build-and-start-the-project)
+    - [3. Stopping the Services](#3-stopping-the-services)
   - [Running the Project without Docker](#running-the-project-without-docker)
     - [1. Install PNPM](#1-install-pnpm)
     - [2. Install Project Dependencies](#2-install-project-dependencies)
@@ -38,31 +37,7 @@ Start by cloning the repository to your local machine:
 git clone https://github.com/cabrera-evil/discord-notify-action
 ```
 
-### 2. Configure Environment Variables
-
-The project relies on environment variables for configuration. Follow these steps to set them up:
-
-1. Navigate to the project directory:
-
-   ```bash
-   cd discord-notify-action
-   ```
-
-2. Copy the example environment file:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-3. Edit the `.env` file to suit your local or production environment configuration:
-
-   ```bash
-   vi .env
-   ```
-
-   Modify the environment variables according to your specific requirements.
-
-### 3. Build and Start the Project
+### 2. Build and Start the Project
 
 To build the Docker images and start the services, use Docker Compose:
 
@@ -75,7 +50,7 @@ This command will:
 - Build the necessary Docker images.
 - Launch the application.
 
-### 4. Stopping the Services
+### 3. Stopping the Services
 
 To stop and clean up all running containers, use the following command:
 
