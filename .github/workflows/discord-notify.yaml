@@ -3,7 +3,7 @@ name: Discord Notify
 on:
   push:
     branches:
-      - master
+      - feature/embed-message-params
 
 jobs:
   action:
