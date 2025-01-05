@@ -7,7 +7,31 @@ export interface TDiscordMessage {
 export type TEmbed = {
   title: string;
   description: string;
+  timestamp?: string;
   color?: number;
   url?: string;
-  image?: { url: string };
+  footer?: TFooter;
+  image?: TImage;
+  thumbnail?: TThumbnail;
+  fields?: TField[];
+};
+
+export type TFooter = {
+  text: string;
+  icon_url: string;
+};
+
+export type TImage = {
+  url: string;
+};
+
+export type TThumbnail = {
+  url: string;
+};
+
+export type TField = {
+  id: number;
+  name: string;
+  value: string;
+  inline: boolean;
 };

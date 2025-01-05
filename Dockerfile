@@ -48,4 +48,4 @@ ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
 # Start the application
-CMD ["node", "index"]
+ENTRYPOINT ["node", "index"]

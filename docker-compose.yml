@@ -1,17 +1,38 @@
 services:
   action:
-    image: cabreraevil/discord-notify-action:latest
     build:
       context: .
       dockerfile: Dockerfile
+    image: cabreraevil/discord-notify-action
+    container_name: discord-notify-action
     restart: no
+    environment:
+      WEBHOOK_URL: '${WEBHOOK_URL}' # Required
+      TITLE: 'GitHub Action' # Optional
+      DESCRIPTION: 'A new commit has been pushed to the master branch.' # Required
+      AVATAR_URL: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' # Optional
+      USERNAME: 'GitHub' # Optional
+      COLOR: '#24292e' # Optional
+      STATUS: 'success' # Optional
+      ENVIRONMENT: 'production' # Optional
+      INCLUDE_IMAGE: 'true' # Optional
+      CUSTOM_IMAGE_URL: '' # Optional
+      REPO_NAME: 'GitHub Action' # Optional
+      REPO_URL: 'https://github.com/cabreraevil/discord-notify-action' # Optional
+      COMMIT_SHA: '' # Optional
+      AUTHOR: 'cabrera-evil' # Optional
     command:
-      [
-        'webhook_url: ${WEBHOOK_URL}',
-        "title: 'GitHub Action'",
-        "description: 'A new commit has been pushed to the master branch.'",
-        "include_image: 'true'",
-        "username: 'GitHub'",
-      ]
-    env_file:
-      - .env
+      - $WEBHOOK_URL
+      - $TITLE
+      - $DESCRIPTION
+      - $AVATAR_URL
+      - $USERNAME
+      - $COLOR
+      - $STATUS
+      - $ENVIRONMENT
+      - $INCLUDE_IMAGE
+      - $CUSTOM_IMAGE_URL
+      - $REPO_NAME
+      - $REPO_URL
+      - $COMMIT_SHA
+      - $AUTHOR

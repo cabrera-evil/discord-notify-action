@@ -1,18 +1,26 @@
 import { TDiscordMessage } from '@/types/discord.type';
-import axios from 'axios';
+import * as core from '@actions/core';
+import axios, { AxiosInstance } from 'axios';
 
 export class DiscordService {
   private static instance: DiscordService;
+  private axiosInstance: AxiosInstance;
+
+  constructor() {
+    this.axiosInstance = axios.create({
+      baseURL: core.getInput('webhook_url', { required: true }),
+      headers: {
+        'X-GitHub-Event': core.getInput('event_name') ?? 'default_event',
+      },
+    });
+    DiscordService.instance = this;
+  }
 
   public static getInstance(): DiscordService {
     return DiscordService.instance ?? new DiscordService();
   }
 
-  async notify(baseUrl: string, event: string, payload: TDiscordMessage) {
-    await axios.post(`${baseUrl}?wait=true`, payload, {
-      headers: {
-        'X-GitHub-Event': event,
-      },
-    });
+  async notify(payload: TDiscordMessage) {
+    await this.axiosInstance.post(`?wait=true`, payload);
   }
 }

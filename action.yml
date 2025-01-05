@@ -5,52 +5,77 @@ branding:
   icon: 'message-circle'
   color: 'black'
 inputs:
-  webhook_url:
-    description: 'Discord webhook URL'
-    required: true
+  author:
+    description: 'Commit author'
+    required: false
     default: ''
-  title:
-    description: 'Message title'
+  avatar_url:
+    description: 'Custom avatar image URL'
+    required: false
+    default: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+  color:
+    description: 'Color for the edge of the card in hex'
+    required: false
+    default: '#24292e'
+  commit_sha:
+    description: 'Commit SHA'
+    required: false
+    default: ''
+  custom_image_url:
+    description: 'Include custom image on card, include_image must be true'
     required: false
     default: ''
   description:
     description: 'Message description'
     required: true
     default: ''
+  environment:
+    description: 'Environment of the action'
+    required: false
+    default: ''
   include_image:
     description: 'If action is used in a pull request, attach the preview image for it to the card. Required for custom_image_url'
     required: false
     default: 'false'
-  avatar_url:
-    description: 'Custom avatar image URL'
+  repo_name:
+    description: 'Repository name'
     required: false
-    default: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+    default: ''
+  repo_url:
+    description: 'Repository URL'
+    required: false
+    default: ''
+  status:
+    description: 'Status of the action'
+    required: false
+    default: ''
+  title:
+    description: 'Message title'
+    required: false
+    default: ''
   username:
     description: 'Custom username'
     required: false
     default: 'GitHub'
-  color:
-    description: 'Color for the edge of the card in hex'
-    required: false
-    default: '#24292e'
-  custom_image_url:
-    description: 'Include custom image on card, include_image must be true'
-    required: false
-    default: ''
-  title_url:
-    description: 'Make the title of the card a link'
-    required: false
+  webhook_url:
+    description: 'Discord webhook URL'
+    required: true
     default: ''
 runs:
   using: 'docker'
   image: 'docker://cabreraevil/discord-notify-action:1.0.2'
   args:
-    - ${{inputs.webhook_url}}
-    - ${{inputs.title}}
-    - ${{inputs.description}}
-    - ${{inputs.include_image}}
+    - ${{inputs.author}}
     - ${{inputs.avatar_url}}
-    - ${{inputs.username}}
     - ${{inputs.color}}
+    - ${{inputs.commit_sha}}
     - ${{inputs.custom_image_url}}
-    - ${{inputs.title_url}}
+    - ${{inputs.description}}
+    - ${{inputs.environment}}
+    - ${{inputs.include_image}}
+    - ${{inputs.repo_name}}
+    - ${{inputs.repo_url}}
+    - ${{inputs.status}}
+    - ${{inputs.title}}
+    - ${{inputs.username}}
+    - ${{inputs.webhook_url}}
