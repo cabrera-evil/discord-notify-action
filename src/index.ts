@@ -1,7 +1,7 @@
+import { DiscordService } from '@/services/discord.service';
+import { createEmbed } from '@/utils/embed.util';
 import * as core from '@actions/core';
 import * as lodash from 'lodash';
-import { DiscordService } from './services/discord.service';
-import { createEmbed } from './utils/embed.util';
 
 export async function main() {
   try {

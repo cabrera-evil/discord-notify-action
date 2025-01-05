@@ -1,5 +1,14 @@
+import { TEmbed } from '@/types/discord.type';
 import * as github from '@actions/github';
-import { TEmbed } from '..//types/embed.type';
+
+interface Props {
+  title: string;
+  description: string;
+  color: string;
+  titleUrl?: string;
+  includeImage: boolean;
+  customImageUrl?: string;
+}
 
 export function createEmbed({
   title,
@@ -8,14 +17,14 @@ export function createEmbed({
   titleUrl,
   includeImage,
   customImageUrl,
-}): TEmbed {
+}: Props): TEmbed {
   const embed: TEmbed = {
     title,
     description,
     color: parseInt(color.replace('#', ''), 16),
     url: titleUrl || undefined,
     image: includeImage
-      ? { url: customImageUrl || getGitHubPullRequestImageUrl() }
+      ? { url: customImageUrl || getGitHubPullRequestImageUrl() || '' }
       : undefined,
   };
   return embed;

@@ -1,5 +1,5 @@
+import { TDiscordMessage } from '@/types/discord.type';
 import axios from 'axios';
-import { TDiscordMessage } from 'src/types/discord-message.type';
 
 export class DiscordService {
   private static instance: DiscordService;

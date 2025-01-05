@@ -1,24 +1,51 @@
-# Use a specific Node.js version as the base image
-FROM node:iron-bookworm-slim
+# Stage 1: Build stage
+FROM node:iron-bookworm-slim AS builder
 
-# Install the latest version of pnpm
+# Install latest version of pnpm
 RUN npm install -g pnpm@latest
 
+# Set the user to run the following commands
+USER node
+
+# Set the working directory inside the container
+WORKDIR /app
+
 # Copy the dependency files to the container
-COPY package*.json pnpm-lock.yaml /
+COPY --chown=node:node package*.json pnpm-lock.yaml ./
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile --ignore-scripts
+
+# Copy application files to the container
+COPY --chown=node:node . .
+
+# Build the application
+RUN pnpm build
+
+# Stage 2: Production stage
+FROM node:iron-bookworm-slim
+
+# Install latest version of pnpm
+RUN npm install -g pnpm@latest
+
+# Set the user to node
+USER node
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the dependency files to the container
+COPY --from=builder --chown=node:node /app/package*.json /app/pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile --ignore-scripts --prod
+
+# Copy only the contents of the dist folder from the builder stage to the root of the app directory
+COPY --from=builder --chown=node:node /app/dist/ ./
 
 # Set the environment variable to production
 ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
-# Copy application files to the container
-COPY . /
-
-# Build the application
-RUN pnpm build
-
 # Start the application
-ENTRYPOINT ["node", "/dist/index"]
+CMD ["node", "index"]
