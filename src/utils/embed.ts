@@ -9,7 +9,7 @@ export function createEmbed(): TEmbed {
       core.getInput('description') ??
       'A new deployment has been successfully completed! All systems are operational.',
     timestamp: new Date().toISOString(),
-    color: parseInt(core.getInput('color').replace('#', ''), 16),
+    color: core.getInput('color') ?? '#24292e',
     footer: {
       text: 'Deployment Service | Powered by Github',
       icon_url: core.getInput('avatar_url'),

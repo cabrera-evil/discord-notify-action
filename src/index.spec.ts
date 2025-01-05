@@ -12,7 +12,7 @@ DiscordService.getInstance = jest.fn().mockReturnValue({
   notify: mockNotify,
 });
 
-describe('main function', () => {
+describe('main', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (core.getInput as jest.Mock).mockImplementation(

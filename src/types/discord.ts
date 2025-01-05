@@ -8,7 +8,7 @@ export type TEmbed = {
   title: string;
   description: string;
   timestamp?: string;
-  color?: number;
+  color?: string;
   url?: string;
   footer?: TFooter;
   image?: TImage;
