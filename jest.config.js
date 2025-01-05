@@ -7,7 +7,7 @@ module.exports = {
   transform: {
     '^.+.tsx?$': ['ts-jest', {}],
   },
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/',
-  }),
+  roots: ['<rootDir>'],
+  modulePaths: [compilerOptions.baseUrl],
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
 };

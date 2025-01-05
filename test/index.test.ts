@@ -1,29 +1,67 @@
-import { getInput, info, setFailed } from '@actions/core';
-import { main } from '../src/index';
-import { DiscordService } from '../src/services/discord.service';
+import { main } from '@/index';
+import { DiscordService } from '@/services/discord.service';
+import { createEmbed } from '@/utils/embed.util';
+import * as core from '@actions/core';
 
-jest.mock('../src/services/discord.service', () => ({
-  DiscordService: {
-    getInstance: jest.fn().mockReturnValue({
-      notify: jest.fn().mockResolvedValue(true),
-    }),
-  },
-}));
+jest.mock('@/services/discord.service');
+jest.mock('@/utils/embed.util');
+jest.mock('@actions/core');
 
-describe('main function tests', () => {
-  it('should send a Discord notification successfully', async () => {
-    await main();
-    expect(getInput).toHaveBeenCalledWith('webhook_url', { required: true });
-    expect(DiscordService.getInstance).toHaveBeenCalled();
-    expect(info).toHaveBeenCalledWith('Discord notification sent successfully');
+const mockNotify = jest.fn();
+DiscordService.getInstance = jest.fn().mockReturnValue({
+  notify: mockNotify,
+});
+
+describe('main function', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (core.getInput as jest.Mock).mockImplementation(
+      (input: keyof { username: string; avatar_url: string }) => {
+        const inputs: { username: string; avatar_url: string } = {
+          username: 'test-username',
+          avatar_url: 'test-avatar-url',
+        };
+        return inputs[input];
+      },
+    );
+    (createEmbed as jest.Mock).mockReturnValue({ title: 'Test Embed' });
   });
 
-  it('should handle errors gracefully', async () => {
-    const mockNotify = jest.spyOn(DiscordService.getInstance(), 'notify');
-    mockNotify.mockRejectedValueOnce(new Error('Mock error'));
+  it('should send a notification with the correct payload', async () => {
     await main();
-    expect(setFailed).toHaveBeenCalledWith(
-      'Failed to send Discord notification: Mock error',
+    expect(DiscordService.getInstance).toHaveBeenCalledTimes(1);
+    expect(createEmbed).toHaveBeenCalledTimes(1);
+    expect(mockNotify).toHaveBeenCalledWith(
+      expect.objectContaining({
+        embeds: [{ title: 'Test Embed' }],
+        username: 'test-username',
+        avatar_url: 'test-avatar-url',
+      }),
+    );
+  });
+
+  it('should omit nil values from the payload', async () => {
+    (core.getInput as jest.Mock).mockImplementation(
+      (input: keyof { username: string | null; avatar_url: string }) => {
+        const inputs: { username: string | null; avatar_url: string } = {
+          username: null,
+          avatar_url: 'test-avatar-url',
+        };
+        return inputs[input];
+      },
+    );
+    await main();
+    expect(mockNotify).toHaveBeenCalledWith(
+      expect.not.objectContaining({ username: null }),
+    );
+  });
+
+  it('should call core.setFailed when an error is thrown', async () => {
+    const errorMessage = 'Test Error';
+    mockNotify.mockRejectedValueOnce(new Error(errorMessage));
+    await main();
+    expect(core.setFailed).toHaveBeenCalledWith(
+      `Failed to send Discord notification: ${errorMessage}`,
     );
   });
 });
