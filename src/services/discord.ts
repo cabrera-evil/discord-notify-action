@@ -1,4 +1,4 @@
-import { TDiscordMessage } from '@/types/discord.type';
+import { TDiscordMessage } from '@/types/discord';
 import * as core from '@actions/core';
 import axios, { AxiosInstance } from 'axios';
 

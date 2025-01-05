@@ -1,5 +1,5 @@
-import { DiscordService } from '@/services/discord.service';
-import { createEmbed } from '@/utils/embed.util';
+import { DiscordService } from '@/services/discord';
+import { createEmbed } from '@/utils/embed';
 import * as core from '@actions/core';
 import * as lodash from 'lodash';
 

@@ -1,5 +1,5 @@
 export interface TDiscordMessage {
-  embeds?: TEmbed;
+  embeds?: TEmbed[];
   username?: string;
   avatar_url?: string;
 }

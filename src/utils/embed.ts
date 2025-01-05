@@ -1,6 +1,6 @@
-import { TEmbed } from '@/types/discord.type';
+import { TEmbed } from '@/types/discord';
 import * as core from '@actions/core';
-import { getGitHubPullRequestImageUrl } from './pull-request.util';
+import { getGitHubPullRequestImageUrl } from './pull-request';
 
 export function createEmbed(): TEmbed {
   return {

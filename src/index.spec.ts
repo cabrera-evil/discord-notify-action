@@ -1,10 +1,10 @@
 import { main } from '@/index';
-import { DiscordService } from '@/services/discord.service';
-import { createEmbed } from '@/utils/embed.util';
+import { DiscordService } from '@/services/discord';
+import { createEmbed } from '@/utils/embed';
 import * as core from '@actions/core';
 
-jest.mock('@/services/discord.service');
-jest.mock('@/utils/embed.util');
+jest.mock('@/services/discord');
+jest.mock('@/utils/embed');
 jest.mock('@actions/core');
 
 const mockNotify = jest.fn();
