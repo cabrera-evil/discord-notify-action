@@ -4,9 +4,6 @@ FROM node:iron-bookworm-slim AS builder
 # Install latest version of pnpm
 RUN npm install -g pnpm@latest
 
-# Set the user to run the following commands
-USER node
-
 # Set the working directory inside the container
 WORKDIR /app
 
@@ -27,9 +24,6 @@ FROM node:iron-bookworm-slim
 
 # Install latest version of pnpm
 RUN npm install -g pnpm@latest
-
-# Set the user to node
-USER node
 
 # Set the working directory
 WORKDIR /app
