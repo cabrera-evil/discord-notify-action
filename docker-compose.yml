@@ -19,6 +19,7 @@ services:
       INPUT_CUSTOM_IMAGE_URL: '' # Optional
       INPUT_REPO_NAME: 'GitHub Action' # Optional
       INPUT_REPO_URL: 'https://github.com/cabreraevil/discord-notify-action' # Optional
+      INPUT_COMMIT_MESSAGE: '' # Optional
       INPUT_COMMIT_SHA: '' # Optional
       INPUT_AUTHOR: 'cabrera-evil' # Optional
     command:
