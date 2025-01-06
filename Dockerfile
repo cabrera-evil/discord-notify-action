@@ -25,9 +25,6 @@ FROM node:iron-bookworm-slim
 # Install latest version of pnpm
 RUN npm install -g pnpm@latest
 
-# Set the working directory
-WORKDIR /app
-
 # Copy the dependency files to the container
 COPY --from=builder --chown=node:node /app/package*.json /app/pnpm-lock.yaml ./
 
