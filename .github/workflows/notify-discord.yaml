@@ -1,9 +1,8 @@
 name: Discord Notify
 
 on:
-  push:
-    tags:
-      - '1.1.0'
+  release:
+    types: [published]
 
 jobs:
   notify:
@@ -11,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Discord notification
-        uses: cabrera-evil/discord-notify-action@1.1.0
+        uses: cabrera-evil/discord-notify-action@1.1.1
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          title: 'GitHub Action'
-          description: 'A new commit has been pushed.'
+          title: 'GitHub Release Notification'
+          description: 'A new release has been published.'
           avatar_url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
           username: 'GitHub'
           color: '#24292e'
@@ -25,6 +24,6 @@ jobs:
           custom_image_url: ''
           repo_name: ${{ github.repository }}
           repo_url: ${{ github.event.repository.html_url }}
-          commit_message: ${{ github.event.head_commit.message }}
-          commit_sha: ${{ github.sha }}
+          commit_message: ${{ github.event.release.body }}
+          commit_sha: ${{ github.event.release.target_commitish }}
           author: ${{ github.actor }}
