@@ -2,7 +2,6 @@ import { createEmbed } from '@/utils/embed';
 import * as core from '@actions/core';
 
 describe('createEmbed', () => {
-  // Returns TEmbed object with all required fields populated from core.getInput values
   it('should create embed with all fields populated when inputs are provided', () => {
     jest.spyOn(core, 'getInput').mockImplementation((name: string) => {
       const inputs: { [key: string]: string } = {
@@ -22,12 +21,10 @@ describe('createEmbed', () => {
     });
 
     jest.spyOn(core, 'getBooleanInput').mockReturnValue(false);
-
     const result = createEmbed();
-
     expect(result.title).toBe('Test Deploy');
     expect(result.description).toBe('Test description');
-    expect(result.color).toBe('#FF0000');
+    expect(result.color).toBe(0xff0000);
     expect(result.footer?.icon_url).toBe('https://test.com/avatar.png');
     expect(result.fields).toHaveLength(5);
     expect(result.fields?.[0].value).toBe(
@@ -35,16 +32,13 @@ describe('createEmbed', () => {
     );
   });
 
-  // Handles missing or undefined core.getInput values
   it('should use default values when inputs are missing', () => {
     jest.spyOn(core, 'getInput').mockReturnValue('');
     jest.spyOn(core, 'getBooleanInput').mockReturnValue(false);
-
     const result = createEmbed();
-
     expect(result.title).toBe('');
     expect(result.description).toBe('');
-    expect(result.color).toBe('');
+    expect(result.color).toBeUndefined();
     expect(result.image).toBeUndefined();
     expect(result.fields).toHaveLength(5);
     expect(result.thumbnail?.url).toBe(

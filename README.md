@@ -19,27 +19,27 @@ For a raw message:
 
 ```yaml
 notify:
-    name: Discord Notification
-    runs-on: ubuntu-latest
-    steps:
-      - name: Discord notification
-        uses: cabrera-evil/discord-notify-action@1.1.0
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          title: 'GitHub Action'
-          description: 'A new commit has been pushed.'
-          avatar_url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
-          username: 'GitHub'
-          color: '#24292e'
-          status: 'success'
-          environment: 'production'
-          include_image: 'true'
-          custom_image_url: ''
-          repo_name: ${{ github.repository }}
-          repo_url: ${{ github.event.repository.html_url }}
-          commit_message: ${{ github.event.head_commit.message }}
-          commit_sha: ${{ github.sha }}
-          author: ${{ github.actor }}
+  name: Discord Notification
+  runs-on: ubuntu-latest
+  steps:
+    - name: Discord notification
+      uses: cabrera-evil/discord-notify-action@1.1.0
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+        title: 'GitHub Action'
+        description: 'A new commit has been pushed.'
+        avatar_url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+        username: 'GitHub'
+        color: '#24292e'
+        status: 'success'
+        environment: 'production'
+        include_image: 'true'
+        custom_image_url: ''
+        repo_name: ${{ github.repository }}
+        repo_url: ${{ github.event.repository.html_url }}
+        commit_message: ${{ github.event.head_commit.message }}
+        commit_sha: ${{ github.sha }}
+        author: ${{ github.actor }}
 ```
 
 ## Arguments
