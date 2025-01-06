@@ -26,13 +26,13 @@ FROM node:iron-bookworm-slim
 RUN npm install -g pnpm@latest
 
 # Copy the dependency files to the container
-COPY --from=builder --chown=node:node /app/package*.json /app/pnpm-lock.yaml ./
+COPY --from=builder --chown=node:node /app/package*.json /app/pnpm-lock.yaml /
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile --ignore-scripts --prod
 
 # Copy only the contents of the dist folder from the builder stage to the root of the app directory
-COPY --from=builder --chown=node:node /app/dist/ ./
+COPY --from=builder --chown=node:node /app/dist/ /
 
 # Set the environment variable to production
 ARG NODE_ENV=production
