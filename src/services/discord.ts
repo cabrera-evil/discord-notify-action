@@ -21,6 +21,10 @@ export class DiscordService {
   }
 
   async notify(payload: TDiscordMessage) {
-    await this.axiosInstance.post(`?wait=true`, payload);
+    await this.axiosInstance.post('', payload, {
+      params: {
+        wait: true,
+      },
+    });
   }
 }

@@ -1,8 +1,10 @@
 name: Discord Notify
 
 on:
-  release:
-    types: [published]
+  workflow_run:
+    workflows: ['Docker Publish']
+    types:
+      - completed
 
 jobs:
   notify:
@@ -24,6 +26,6 @@ jobs:
           custom_image_url: ''
           repo_name: ${{ github.repository }}
           repo_url: ${{ github.event.repository.html_url }}
-          commit_message: ${{ github.event.release.body }}
-          commit_sha: ${{ github.event.release.target_commitish }}
+          commit_message: ${{ github.event.workflow_run.head_commit.message }}
+          commit_sha: ${{ github.sha }}
           author: ${{ github.actor }}
