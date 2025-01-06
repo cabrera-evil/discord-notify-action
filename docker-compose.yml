@@ -7,21 +7,21 @@ services:
     container_name: discord-notify-action
     restart: no
     environment:
-      INPUT_WEBHOOK_URL: '${WEBHOOK_URL}' # Required
-      INPUT_TITLE: 'GitHub Action' # Optional
-      INPUT_DESCRIPTION: 'A new commit has been pushed to the master branch.' # Required
-      INPUT_AVATAR_URL: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' # Optional
-      INPUT_USERNAME: 'GitHub' # Optional
-      INPUT_COLOR: '#24292e' # Optional
-      INPUT_STATUS: 'success' # Optional
-      INPUT_ENVIRONMENT: 'production' # Optional
-      INPUT_INCLUDE_IMAGE: 'true' # Optional
-      INPUT_CUSTOM_IMAGE_URL: '' # Optional
-      INPUT_REPO_NAME: 'GitHub Action' # Optional
-      INPUT_REPO_URL: 'https://github.com/cabreraevil/discord-notify-action' # Optional
-      INPUT_COMMIT_MESSAGE: '' # Optional
-      INPUT_COMMIT_SHA: '' # Optional
-      INPUT_AUTHOR: 'cabrera-evil' # Optional
+      INPUT_WEBHOOK_URL: '${INPUT_WEBHOOK_URL}' # Required
+      INPUT_TITLE: ${INPUT_TITLE} # Optional
+      INPUT_DESCRIPTION: ${INPUT_DESCRIPTION} # Required
+      INPUT_AVATAR_URL: ${INPUT_AVATAR_URL} # Optional
+      INPUT_USERNAME: ${INPUT_USERNAME} # Optional
+      INPUT_COLOR: ${INPUT_COLOR} # Optional
+      INPUT_STATUS: ${INPUT_STATUS} # Optional
+      INPUT_ENVIRONMENT: ${INPUT_ENVIRONMENT} # Optional
+      INPUT_INCLUDE_IMAGE: ${INPUT_INCLUDE_IMAGE} # Optional
+      INPUT_CUSTOM_IMAGE_URL: ${INPUT_CUSTOM_IMAGE_URL} # Optional
+      INPUT_REPO_NAME: ${INPUT_REPO_NAME} # Optional
+      INPUT_REPO_URL: ${INPUT_REPO_URL} # Optional
+      INPUT_COMMIT_MESSAGE: ${INPUT_COMMIT_MESSAGE} # Optional
+      INPUT_COMMIT_SHA: ${INPUT_COMMIT_SHA} # Optional
+      INPUT_AUTHOR: ${INPUT_AUTHOR} # Optional
     command:
       - $INPUT_WEBHOOK_URL
       - $INPUT_TITLE
