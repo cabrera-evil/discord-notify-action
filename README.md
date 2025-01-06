@@ -19,17 +19,27 @@ For a raw message:
 
 ```yaml
 notify:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Discord notification
-      uses: cabrera-evil/discord-notify-action@1.0.1
-      with:
-        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-        title: 'GitHub Action'
-        description: 'A new commit has been pushed.'
-        include_image: 'true'
-        username: 'GitHub'
-        title_url: 'https://github.com/${{ github.repository }}/commit/${{ github.sha }}'
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        uses: cabrera-evil/discord-notify-action@1.1.0
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: 'GitHub Action'
+          description: 'A new commit has been pushed.'
+          avatar_url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+          username: 'GitHub'
+          color: '#24292e'
+          status: 'success'
+          environment: 'production'
+          include_image: 'true'
+          custom_image_url: ''
+          repo_name: ${{ github.repository }}
+          repo_url: ${{ github.event.repository.html_url }}
+          commit_message: ${{ github.event.head_commit.message }}
+          commit_sha: ${{ github.sha }}
+          author: ${{ github.actor }}
 ```
 
 ## Arguments
@@ -39,12 +49,18 @@ The following arguments can be configured:
 - **`webhook_url`** (**required**): The [Discord Webhook URL](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
 - **`title`** (_optional_): The title of the notification.
 - **`description`** (_optional_): The description of the notification.
-- **`include_image`** (_optional_): A boolean value to include an image in the notification.
 - **`avatar_url`** (_optional_): The URL of the avatar image to use in the notification.
 - **`username`** (_optional_): The username to use in the notification.
 - **`color`** (_optional_): The color of the notification.
+- **`status`** (_optional_): The status of the notification.
+- **`environment`** (_optional_): The environment of the notification.
+- **`include_image`** (_optional_): A boolean value to include an image in the notification.
 - **`custom_image_url`** (_optional_): The URL of a custom image to include in the notification.
-- **`title_url`** (_optional_): The URL to link the title to.
+- **`repo_name`** (_optional_): The name of the repository.
+- **`repo_url`** (_optional_): The URL of the repository.
+- **`commit_message`** (_optional_): The message of the commit.
+- **`commit_sha`** (_optional_): The SHA of the commit.
+- **`author`** (_optional_): The author of the commit.
 
 ## License
 

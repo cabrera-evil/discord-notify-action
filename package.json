@@ -1,43 +1,23 @@
 {
   "name": "discord-notify-action",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "private": false,
   "description": "GitHub Action that send a message to a Discord channel.",
-  "keywords": [
-    "discord",
-    "github",
-    "action"
-  ],
-  "homepage": "https://github.com/cabrera-evil/discord-notify-action/#readme",
-  "bugs": {
-    "url": "https://github.com/cabrera-evil/discord-notify-action/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cabrera-evil/discord-notify-action"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "cabrera-evil",
-    "email": "douglascabrera.dev@gmail.com"
-  },
-  "maintainers": [
-    {
-      "name": "cabrera-evil",
-      "email": "douglascabrera.dev@gmail.com"
-    }
-  ],
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc --project tsconfig.build.json && tsc-alias",
+    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index",
+    "start": "ts-node -r tsconfig-paths/register dist/index",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint --fix",
     "lint:check": "eslint",
-    "prepare": "husky",
-    "start": "node dist/index",
-    "test": "jest"
+    "lint:fix": "pnpm lint && pnpm format",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{ts,js}": [
@@ -55,11 +35,15 @@
   "devDependencies": {
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/js": "^9.17.0",
     "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.7",
     "@types/node": "^22.5.0",
     "dotenv": "8.2.0",
-    "eslint": "^9.9.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.14.0",
     "husky": "^9.1.5",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.9",
@@ -67,11 +51,11 @@
     "prettier-plugin-organize-imports": "^4.0.0",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.5.4"
-  },
-  "engines": {
-    "node": ">=14.0.0",
-    "pnpm": ">=6.0.0"
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.19.0"
   }
 }
