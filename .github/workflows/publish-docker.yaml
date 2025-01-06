@@ -1,0 +1,18 @@
+name: Docker Publish
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    name: Publish
+    uses: cabrera-evil/workflows/.github/workflows/publish-docker.yaml@master
+    with:
+      DOCKER_USERNAME_REF: op://actions/Docker/username
+      DOCKER_PASSWORD_REF: op://actions/Docker/password
+    secrets: inherit
