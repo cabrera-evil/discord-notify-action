@@ -7,32 +7,32 @@ services:
     container_name: discord-notify-action
     restart: no
     environment:
-      WEBHOOK_URL: '${WEBHOOK_URL}' # Required
-      TITLE: 'GitHub Action' # Optional
-      DESCRIPTION: 'A new commit has been pushed to the master branch.' # Required
-      AVATAR_URL: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' # Optional
-      USERNAME: 'GitHub' # Optional
-      COLOR: '#24292e' # Optional
-      STATUS: 'success' # Optional
-      ENVIRONMENT: 'production' # Optional
-      INCLUDE_IMAGE: 'true' # Optional
-      CUSTOM_IMAGE_URL: '' # Optional
-      REPO_NAME: 'GitHub Action' # Optional
-      REPO_URL: 'https://github.com/cabreraevil/discord-notify-action' # Optional
-      COMMIT_SHA: '' # Optional
-      AUTHOR: 'cabrera-evil' # Optional
+      INPUT_WEBHOOK_URL: '${WEBHOOK_URL}' # Required
+      INPUT_TITLE: 'GitHub Action' # Optional
+      INPUT_DESCRIPTION: 'A new commit has been pushed to the master branch.' # Required
+      INPUT_AVATAR_URL: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' # Optional
+      INPUT_USERNAME: 'GitHub' # Optional
+      INPUT_COLOR: '#24292e' # Optional
+      INPUT_STATUS: 'success' # Optional
+      INPUT_ENVIRONMENT: 'production' # Optional
+      INPUT_INCLUDE_IMAGE: 'true' # Optional
+      INPUT_CUSTOM_IMAGE_URL: '' # Optional
+      INPUT_REPO_NAME: 'GitHub Action' # Optional
+      INPUT_REPO_URL: 'https://github.com/cabreraevil/discord-notify-action' # Optional
+      INPUT_COMMIT_SHA: '' # Optional
+      INPUT_AUTHOR: 'cabrera-evil' # Optional
     command:
-      - $WEBHOOK_URL
-      - $TITLE
-      - $DESCRIPTION
-      - $AVATAR_URL
-      - $USERNAME
-      - $COLOR
-      - $STATUS
-      - $ENVIRONMENT
-      - $INCLUDE_IMAGE
-      - $CUSTOM_IMAGE_URL
-      - $REPO_NAME
-      - $REPO_URL
-      - $COMMIT_SHA
-      - $AUTHOR
+      - $INPUT_WEBHOOK_URL
+      - $INPUT_TITLE
+      - $INPUT_DESCRIPTION
+      - $INPUT_AVATAR_URL
+      - $INPUT_USERNAME
+      - $INPUT_COLOR
+      - $INPUT_STATUS
+      - $INPUT_ENVIRONMENT
+      - $INPUT_INCLUDE_IMAGE
+      - $INPUT_CUSTOM_IMAGE_URL
+      - $INPUT_REPO_NAME
+      - $INPUT_REPO_URL
+      - $INPUT_COMMIT_SHA
+      - $INPUT_AUTHOR

@@ -17,6 +17,10 @@ inputs:
     description: 'Color for the edge of the card in hex'
     required: false
     default: '#24292e'
+  commit_message:
+    description: 'Commit message'
+    required: false
+    default: ''
   commit_sha:
     description: 'Commit SHA'
     required: false
@@ -68,6 +72,7 @@ runs:
     - ${{inputs.author}}
     - ${{inputs.avatar_url}}
     - ${{inputs.color}}
+    - ${{inputs.commit_message}}
     - ${{inputs.commit_sha}}
     - ${{inputs.custom_image_url}}
     - ${{inputs.description}}

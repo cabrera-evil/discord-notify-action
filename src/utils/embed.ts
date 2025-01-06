@@ -53,7 +53,7 @@ export function createEmbed(): TEmbed {
       {
         id: Math.floor(Math.random() * 1000000000),
         name: '🔗 Commit',
-        value: `[${core.getInput('commit')}](${core.getInput('repo_url')}/commit/abc1234): Fix critical bug in user authentication`,
+        value: `[${core.getInput('commit_sha')}](${core.getInput('repo_url')}/commit/${core.getInput('commit_sha')}): ${core.getInput('commit_message')}`,
         inline: false,
       },
     ],

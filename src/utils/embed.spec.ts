@@ -15,7 +15,8 @@ describe('createEmbed', () => {
         environment: 'production',
         status: 'success',
         author: 'testuser',
-        commit: 'abc123',
+        commit_sha: 'abc123',
+        commit_message: 'chore(deps): bump dependencies',
       };
       return inputs[name as keyof typeof inputs] || '';
     });
