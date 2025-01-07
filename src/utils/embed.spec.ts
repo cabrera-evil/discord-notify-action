@@ -40,7 +40,7 @@ describe('createEmbed', () => {
     expect(result.description).toBe('');
     expect(result.color).toBeUndefined();
     expect(result.image).toBeUndefined();
-    expect(result.fields).toHaveLength(5);
+    expect(result.fields).toHaveLength(0);
     expect(result.thumbnail?.url).toBe(
       'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
     );

@@ -28,36 +28,58 @@ export function createEmbed(): TEmbed {
       url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
     },
     fields: [
-      {
-        id: Math.floor(Math.random() * 1000000000),
-        name: '📂 Project',
-        value: `[${core.getInput('repo_name')}](${core.getInput('repo_url')})`,
-        inline: true,
-      },
-      {
-        id: Math.floor(Math.random() * 1000000000),
-        name: '🌍 Environment',
-        value: core.getInput('environment'),
-        inline: true,
-      },
-      {
-        id: Math.floor(Math.random() * 1000000000),
-        name: '✅ Status',
-        value: core.getInput('status'),
-        inline: true,
-      },
-      {
-        id: Math.floor(Math.random() * 1000000000),
-        name: '👤 Author',
-        value: `[${core.getInput('author')}](https://github.com/${core.getInput('author')})`,
-        inline: true,
-      },
-      {
-        id: Math.floor(Math.random() * 1000000000),
-        name: '🔗 Commit',
-        value: `[${core.getInput('commit_sha')}](${core.getInput('repo_url')}/commit/${core.getInput('commit_sha')}): ${core.getInput('commit_message')}`,
-        inline: false,
-      },
+      ...(core.getInput('repo_name') && core.getInput('repo_url')
+        ? [
+            {
+              id: Math.floor(Math.random() * 1000000000),
+              name: '📂 Project',
+              value: `[${core.getInput('repo_name')}](${core.getInput('repo_url')})`,
+              inline: true,
+            },
+          ]
+        : []),
+      ...(core.getInput('environment')
+        ? [
+            {
+              id: Math.floor(Math.random() * 1000000000),
+              name: '🌍 Environment',
+              value: core.getInput('environment'),
+              inline: true,
+            },
+          ]
+        : []),
+      ...(core.getInput('status')
+        ? [
+            {
+              id: Math.floor(Math.random() * 1000000000),
+              name: '✅ Status',
+              value: core.getInput('status'),
+              inline: true,
+            },
+          ]
+        : []),
+      ...(core.getInput('author')
+        ? [
+            {
+              id: Math.floor(Math.random() * 1000000000),
+              name: '👤 Author',
+              value: `[${core.getInput('author')}](https://github.com/${core.getInput('author')})`,
+              inline: true,
+            },
+          ]
+        : []),
+      ...(core.getInput('commit_sha') &&
+      core.getInput('repo_url') &&
+      core.getInput('commit_message')
+        ? [
+            {
+              id: Math.floor(Math.random() * 1000000000),
+              name: '🔗 Commit',
+              value: `[${core.getInput('commit_sha')}](${core.getInput('repo_url')}/commit/${core.getInput('commit_sha')}): ${core.getInput('commit_message')}`,
+              inline: false,
+            },
+          ]
+        : []),
     ],
   };
 }

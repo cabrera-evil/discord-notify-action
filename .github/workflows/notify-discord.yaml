@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Discord notification
-        uses: cabrera-evil/discord-notify-action@1.1.6
+        uses: cabrera-evil/discord-notify-action@1.1.7
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: 'GitHub Release Notification'
