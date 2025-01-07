@@ -43,7 +43,9 @@ export function createEmbed(): TEmbed {
             {
               id: Math.floor(Math.random() * 1000000000),
               name: '🌍 Environment',
-              value: core.getInput('environment'),
+              value: core.getInput('url')
+                ? `[${core.getInput('environment')}](${core.getInput('url')})`
+                : core.getInput('environment'),
               inline: true,
             },
           ]

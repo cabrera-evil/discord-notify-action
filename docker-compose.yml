@@ -12,6 +12,7 @@ services:
       INPUT_DESCRIPTION: ${INPUT_DESCRIPTION} # Required
       INPUT_AVATAR_URL: ${INPUT_AVATAR_URL} # Optional
       INPUT_USERNAME: ${INPUT_USERNAME} # Optional
+      INPUT_URL: ${INPUT_URL} # Optional
       INPUT_COLOR: ${INPUT_COLOR} # Optional
       INPUT_STATUS: ${INPUT_STATUS} # Optional
       INPUT_ENVIRONMENT: ${INPUT_ENVIRONMENT} # Optional
@@ -28,6 +29,7 @@ services:
       - $INPUT_DESCRIPTION
       - $INPUT_AVATAR_URL
       - $INPUT_USERNAME
+      - $INPUT_URL
       - $INPUT_COLOR
       - $INPUT_STATUS
       - $INPUT_ENVIRONMENT
