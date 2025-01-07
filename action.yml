@@ -67,7 +67,7 @@ inputs:
     default: ''
 runs:
   using: 'docker'
-  image: 'docker://cabreraevil/discord-notify-action:1.1.6'
+  image: 'docker://cabreraevil/discord-notify-action:1.1.7'
   args:
     - ${{inputs.author}}
     - ${{inputs.avatar_url}}
