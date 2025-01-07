@@ -11,21 +11,41 @@ jobs:
     name: Discord Notification
     runs-on: ubuntu-latest
     steps:
+      - name: Set Environment
+        id: set_environment
+        run: |
+          # Set notification color based on DEPLOY_STATUS
+          case "${{ job.status }}" in
+            success) echo "color=#17C964" >> $GITHUB_OUTPUT ;;
+            failure) echo "color=#F31260" >> $GITHUB_OUTPUT ;;
+            *)       echo "color=#FFA500" >> $GITHUB_OUTPUT ;;
+          esac
+          # Get git short SHA
+          case "${{ github.event_name }}" in
+            pull_request)
+              echo "short_sha=$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "short_sha=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
+              ;;
+          esac
+
       - name: Discord notification
-        uses: cabrera-evil/discord-notify-action@1.1.7
+        uses: cabrera-evil/discord-notify-action@1.1.8
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: 'GitHub Release Notification'
           description: 'A new release has been published.'
           avatar_url: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
           username: 'GitHub'
-          color: '#24292e'
-          status: 'success'
+          url: ${{ github.event.workflow_run.html_url }}
+          color: ${{ steps.set_environment.outputs.color }}
+          status: ${{ job.status }}
           environment: 'production'
           include_image: 'true'
           custom_image_url: ''
           repo_name: ${{ github.repository }}
           repo_url: ${{ github.event.repository.html_url }}
           commit_message: ${{ github.event.workflow_run.head_commit.message }}
-          commit_sha: ${{ github.sha }}
+          commit_sha: ${{ steps.set_environment.outputs.short_sha }}
           author: ${{ github.actor }}

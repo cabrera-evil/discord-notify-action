@@ -61,13 +61,17 @@ inputs:
     description: 'Custom username'
     required: false
     default: 'GitHub'
+  url:
+    description: 'Deployment URL'
+    required: false
+    default: ''
   webhook_url:
     description: 'Discord webhook URL'
     required: true
     default: ''
 runs:
   using: 'docker'
-  image: 'docker://cabreraevil/discord-notify-action:1.1.7'
+  image: 'docker://cabreraevil/discord-notify-action:1.1.8'
   args:
     - ${{inputs.author}}
     - ${{inputs.avatar_url}}
