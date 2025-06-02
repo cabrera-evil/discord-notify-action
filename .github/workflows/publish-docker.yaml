@@ -27,6 +27,13 @@ jobs:
       push_base_sha: ${{ github.event.base_ref }}
     secrets: inherit
 
+  analyze_deps:
+    name: Analyze
+    uses: cabrera-evil/workflows/.github/workflows/deps-analysis.yaml@master
+    with:
+      report: true
+    secrets: inherit
+
   release:
     name: Release
     needs: analyze_code
