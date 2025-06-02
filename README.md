@@ -24,7 +24,7 @@ WARNING:
 
 # Supported tags and respective `Dockerfile` links
 
-- [`latest`](https://github.com/cabreraevil/discord-notify-action/blob/master/Dockerfile)
+- [`latest`](https://github.com/cabrera-evil/discord-notify-action/blob/master/Dockerfile)
 
 # What is Discord Notify Action?
 
