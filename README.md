@@ -91,7 +91,7 @@ notify:
   runs-on: ubuntu-latest
   steps:
     - name: Discord notification
-      uses: cabrera-evil/discord-notify-action@1.1.8
+      uses: cabrera-evil/discord-notify-action@v1.0.0
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
         title: 'GitHub Action'
@@ -112,23 +112,23 @@ notify:
 
 ## Arguments
 
-| Variable           | Description                                           | Default      |
-| ------------------ | ----------------------------------------------------- | ------------ |
-| `webhook_url`      | Discord Webhook URL                                   | _(required)_ |
-| `title`            | Title of the notification                             | _(unset)_    |
-| `description`      | Description of the notification                       | _(unset)_    |
-| `avatar_url`       | URL of the avatar image to use in the notification    | _(unset)_    |
-| `username`         | Username to use in the notification                   | _(unset)_    |
-| `color`            | Color of the notification                             | _(unset)_    |
-| `status`           | Status of the notification                            | _(unset)_    |
-| `environment`      | Environment of the notification                       | _(unset)_    |
-| `include_image`    | Boolean value to include an image in the notification | `false`      |
-| `custom_image_url` | URL of a custom image to include in the notification  | _(unset)_    |
-| `repo_name`        | Name of the repository                                | _(unset)_    |
-| `repo_url`         | URL of the repository                                 | _(unset)_    |
-| `commit_message`   | Message of the commit                                 | _(unset)_    |
-| `commit_sha`       | SHA of the commit                                     | _(unset)_    |
-| `author`           | Author of the commit                                  | _(unset)_    |
+| Variable           | Description                                           | Default                                                                     |
+| ------------------ | ----------------------------------------------------- | --------------------------------------------------------------------------- |
+| `webhook_url`      | Discord Webhook URL                                   | `''` (required)                                                             |
+| `title`            | Title of the notification                             | `''`                                                                        |
+| `description`      | Description of the notification                       | `''` (required)                                                             |
+| `avatar_url`       | URL of the avatar image to use in the notification    | `https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png` |
+| `username`         | Username to use in the notification                   | `GitHub`                                                                    |
+| `color`            | Color of the notification                             | `#24292e`                                                                   |
+| `status`           | Status of the notification                            | `''`                                                                        |
+| `environment`      | Environment of the notification                       | `''`                                                                        |
+| `include_image`    | Boolean value to include an image in the notification | `false`                                                                     |
+| `custom_image_url` | URL of a custom image to include in the notification  | `''`                                                                        |
+| `repo_name`        | Name of the repository                                | `''`                                                                        |
+| `repo_url`         | URL of the repository                                 | `''`                                                                        |
+| `commit_message`   | Message of the commit                                 | `''`                                                                        |
+| `commit_sha`       | SHA of the commit                                     | `''`                                                                        |
+| `author`           | Author of the commit                                  | `''`                                                                        |
 
 # Quick reference (cont.)
 
