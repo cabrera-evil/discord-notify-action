@@ -17,10 +17,10 @@ WARNING:
 # Quick reference
 
 - **Maintained by**:  
-  [Douglas Cabrera](https://github.com/cabreraevil)
+  [Douglas Cabrera](https://github.com/cabrera-evil)
 
 - **Where to get help**:  
-  [GitHub Issues](https://github.com/cabreraevil/discord-notify-action/issues)
+  [GitHub Issues](https://github.com/cabrera-evil/discord-notify-action/issues)
 
 # Supported tags and respective `Dockerfile` links
 
@@ -91,7 +91,7 @@ notify:
   runs-on: ubuntu-latest
   steps:
     - name: Discord notification
-      uses: cabrera-evil/discord-notify-action@v1.0.0
+      uses: cabrera-evil/discord-notify-action@v1.0.1
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
         title: 'GitHub Action'
@@ -133,7 +133,7 @@ notify:
 # Quick reference (cont.)
 
 - **Where to file issues**:
-  [https://github.com/cabreraevil/discord-notify-action/issues](https://github.com/cabreraevil/discord-notify-action/issues)
+  [https://github.com/cabrera-evil/discord-notify-action/issues](https://github.com/cabrera-evil/discord-notify-action/issues)
 
 - **Supported architectures**:
   `linux/amd64`, `linux/arm64`
@@ -142,8 +142,8 @@ notify:
   [Docker Hub: cabreraevil/discord-notify-action](https://hub.docker.com/r/cabreraevil/discord-notify-action)
 
 - **Source of this description**:
-  [docs repo’s `discord-notify-action/` directory](https://github.com/cabreraevil/discord-notify-action)
+  [docs repo’s `discord-notify-action/` directory](https://github.com/cabrera-evil/discord-notify-action)
 
 ## License
 
-This project is released under the [MIT License](https://github.com/cabreraevil/discord-notify-action/blob/master/LICENSE).
+This project is released under the [MIT License](https://github.com/cabrera-evil/discord-notify-action/blob/master/LICENSE).
