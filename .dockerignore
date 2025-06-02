@@ -63,3 +63,4 @@ commitlint.config.*
 
 # Actions
 .github/
+secrets.yaml

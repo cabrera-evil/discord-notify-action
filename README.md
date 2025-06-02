@@ -1,21 +1,89 @@
-# Discord Notify Action
+<!--
 
-Welcome to the **Discord Notify Action** project repository. This project provides a GitHub Action for sending notifications to a Discord channel using a webhook. It is built with Node.js and MongoDB, and is fully containerized using Docker and Docker Compose.
+********************************************************************************
 
-## Table of Contents
+WARNING:
 
-- [Discord Notify Action](#discord-notify-action)
-  - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-  - [Arguments](#arguments)
-  - [License](#license)
-  - [Contributing](#contributing)
+    DO NOT EDIT "amplify-json/README.md"
 
-## Usage
+    IT IS AUTO-GENERATED
 
-To use this GitHub Action in your workflows, include the following step in your `.github/workflows` YAML file:
+    (based on Dockerfile, usage example, and entrypoint logic)
 
-For a raw message:
+********************************************************************************
+
+-->
+
+# Quick reference
+
+- **Maintained by**:  
+  [Douglas Cabrera](https://github.com/cabreraevil)
+
+- **Where to get help**:  
+  [GitHub Issues](https://github.com/cabreraevil/discord-notify-action/issues)
+
+# Supported tags and respective `Dockerfile` links
+
+- [`latest`](https://github.com/cabreraevil/discord-notify-action/blob/master/Dockerfile)
+
+# What is Discord Notify Action?
+
+**Discord Notify Action** is a GitHub Action that allows you to send notifications to a Discord channel using a webhook. It is designed to be simple and easy to use, providing a way to notify your team about important events in your GitHub repository, such as new commits, pull requests, or issues.
+
+> The project uses `node.js` to send the notification to Discord, and it is designed to be run as a Docker container. This allows for easy integration into your CI/CD pipeline or local development environment.
+
+# How to use this action
+
+## docker exec usage (standalone)
+
+```bash
+docker run --name discord-notify-action --restart no -e INPUT_WEBHOOK_URL=${INPUT_WEBHOOK_URL} -e INPUT_TITLE=${INPUT_TITLE} -e INPUT_DESCRIPTION=${INPUT_DESCRIPTION} -e INPUT_AVATAR_URL=${INPUT_AVATAR_URL} -e INPUT_USERNAME=${INPUT_USERNAME} -e INPUT_URL=${INPUT_URL} -e INPUT_COLOR=${INPUT_COLOR} -e INPUT_STATUS=${INPUT_STATUS} -e INPUT_ENVIRONMENT=${INPUT_ENVIRONMENT} -e INPUT_INCLUDE_IMAGE=${INPUT_INCLUDE_IMAGE} -e INPUT_CUSTOM_IMAGE_URL=${INPUT_CUSTOM_IMAGE_URL} -e INPUT_REPO_NAME=${INPUT_REPO_NAME} -e INPUT_REPO_URL=${INPUT_REPO_URL} -e INPUT_COMMIT_MESSAGE=${INPUT_COMMIT_MESSAGE} -e INPUT_COMMIT_SHA=${INPUT_COMMIT_SHA} -e INPUT_AUTHOR=${INPUT_AUTHOR} cabreraevil/discord-notify-action $INPUT_WEBHOOK_URL,$INPUT_TITLE,$INPUT_DESCRIPTION,$INPUT_AVATAR_URL,$INPUT_USERNAME,$INPUT_URL,$INPUT_COLOR,$INPUT_STATUS,$INPUT_ENVIRONMENT,$INPUT_INCLUDE_IMAGE,$INPUT_CUSTOM_IMAGE_URL,$INPUT_REPO_NAME,$INPUT_REPO_URL,$INPUT_COMMIT_SHA,$INPUT_AUTHOR
+```
+
+## docker-compose usage
+
+```yaml
+services:
+  action:
+    image: cabreraevil/discord-notify-action
+    container_name: discord-notify-action
+    restart: no
+    environment:
+      INPUT_WEBHOOK_URL: '${INPUT_WEBHOOK_URL}' # Required
+      INPUT_TITLE: ${INPUT_TITLE} # Optional
+      INPUT_DESCRIPTION: ${INPUT_DESCRIPTION} # Required
+      INPUT_AVATAR_URL: ${INPUT_AVATAR_URL} # Optional
+      INPUT_USERNAME: ${INPUT_USERNAME} # Optional
+      INPUT_URL: ${INPUT_URL} # Optional
+      INPUT_COLOR: ${INPUT_COLOR} # Optional
+      INPUT_STATUS: ${INPUT_STATUS} # Optional
+      INPUT_ENVIRONMENT: ${INPUT_ENVIRONMENT} # Optional
+      INPUT_INCLUDE_IMAGE: ${INPUT_INCLUDE_IMAGE} # Optional
+      INPUT_CUSTOM_IMAGE_URL: ${INPUT_CUSTOM_IMAGE_URL} # Optional
+      INPUT_REPO_NAME: ${INPUT_REPO_NAME} # Optional
+      INPUT_REPO_URL: ${INPUT_REPO_URL} # Optional
+      INPUT_COMMIT_MESSAGE: ${INPUT_COMMIT_MESSAGE} # Optional
+      INPUT_COMMIT_SHA: ${INPUT_COMMIT_SHA} # Optional
+      INPUT_AUTHOR: ${INPUT_AUTHOR} # Optional
+    command:
+      - $INPUT_WEBHOOK_URL
+      - $INPUT_TITLE
+      - $INPUT_DESCRIPTION
+      - $INPUT_AVATAR_URL
+      - $INPUT_USERNAME
+      - $INPUT_URL
+      - $INPUT_COLOR
+      - $INPUT_STATUS
+      - $INPUT_ENVIRONMENT
+      - $INPUT_INCLUDE_IMAGE
+      - $INPUT_CUSTOM_IMAGE_URL
+      - $INPUT_REPO_NAME
+      - $INPUT_REPO_URL
+      - $INPUT_COMMIT_SHA
+      - $INPUT_AUTHOR
+```
+
+## GitHub Action usage
 
 ```yaml
 notify:
@@ -23,7 +91,7 @@ notify:
   runs-on: ubuntu-latest
   steps:
     - name: Discord notification
-      uses: cabrera-evil/discord-notify-action@1.1.0
+      uses: cabrera-evil/discord-notify-action@1.1.8
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
         title: 'GitHub Action'
@@ -44,28 +112,38 @@ notify:
 
 ## Arguments
 
-The following arguments can be configured:
+| Variable           | Description                                           | Default      |
+| ------------------ | ----------------------------------------------------- | ------------ |
+| `webhook_url`      | Discord Webhook URL                                   | _(required)_ |
+| `title`            | Title of the notification                             | _(unset)_    |
+| `description`      | Description of the notification                       | _(unset)_    |
+| `avatar_url`       | URL of the avatar image to use in the notification    | _(unset)_    |
+| `username`         | Username to use in the notification                   | _(unset)_    |
+| `color`            | Color of the notification                             | _(unset)_    |
+| `status`           | Status of the notification                            | _(unset)_    |
+| `environment`      | Environment of the notification                       | _(unset)_    |
+| `include_image`    | Boolean value to include an image in the notification | `false`      |
+| `custom_image_url` | URL of a custom image to include in the notification  | _(unset)_    |
+| `repo_name`        | Name of the repository                                | _(unset)_    |
+| `repo_url`         | URL of the repository                                 | _(unset)_    |
+| `commit_message`   | Message of the commit                                 | _(unset)_    |
+| `commit_sha`       | SHA of the commit                                     | _(unset)_    |
+| `author`           | Author of the commit                                  | _(unset)_    |
 
-- **`webhook_url`** (**required**): The [Discord Webhook URL](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
-- **`title`** (_optional_): The title of the notification.
-- **`description`** (_optional_): The description of the notification.
-- **`avatar_url`** (_optional_): The URL of the avatar image to use in the notification.
-- **`username`** (_optional_): The username to use in the notification.
-- **`color`** (_optional_): The color of the notification.
-- **`status`** (_optional_): The status of the notification.
-- **`environment`** (_optional_): The environment of the notification.
-- **`include_image`** (_optional_): A boolean value to include an image in the notification.
-- **`custom_image_url`** (_optional_): The URL of a custom image to include in the notification.
-- **`repo_name`** (_optional_): The name of the repository.
-- **`repo_url`** (_optional_): The URL of the repository.
-- **`commit_message`** (_optional_): The message of the commit.
-- **`commit_sha`** (_optional_): The SHA of the commit.
-- **`author`** (_optional_): The author of the commit.
+# Quick reference (cont.)
+
+- **Where to file issues**:
+  [https://github.com/cabreraevil/discord-notify-action/issues](https://github.com/cabreraevil/discord-notify-action/issues)
+
+- **Supported architectures**:
+  `linux/amd64`, `linux/arm64`
+
+- **Published image details**:
+  [Docker Hub: cabreraevil/discord-notify-action](https://hub.docker.com/r/cabreraevil/discord-notify-action)
+
+- **Source of this description**:
+  [docs repo’s `discord-notify-action/` directory](https://github.com/cabreraevil/discord-notify-action)
 
 ## License
 
-This repository is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute as long as you include the original license text.
-
-## Contributing
-
-We welcome and encourage contributions to enhance the functionality and usability of this project. Please contact the repository owner to discuss your ideas, or submit a pull request. All contributions will be reviewed and must meet the project's standards before being merged.
+This project is released under the [MIT License](https://github.com/cabreraevil/discord-notify-action/blob/master/LICENSE).
