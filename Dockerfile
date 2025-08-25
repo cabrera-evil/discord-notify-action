@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM node:iron-bookworm-slim AS builder
+FROM node:jod-bookworm-slim AS builder
 
 # Install latest version of pnpm
 RUN npm install -g pnpm@latest
@@ -20,7 +20,7 @@ COPY . .
 RUN pnpm build
 
 # Stage 2: Production stage
-FROM node:iron-bookworm-slim
+FROM node:jod-bookworm-slim
 
 # Install latest version of pnpm
 RUN npm install -g pnpm@latest
