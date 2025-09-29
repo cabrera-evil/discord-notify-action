@@ -1,42 +1,83 @@
-# Stage 1: Build stage
-FROM node:iron-bookworm-slim AS builder
+# Use specific Node.js version for consistency
+ARG NODE_VERSION=jod
+ARG PNPM_VERSION=latest
 
-# Install latest version of pnpm
-RUN npm install -g pnpm@latest
+# ==============================================================================
+# Base stage - Common dependencies and user setup
+# ==============================================================================
+FROM node:${NODE_VERSION}-bookworm-slim AS base
 
-# Set the working directory inside the container
+# Install pnpm with caching
+RUN --mount=type=cache,target=/root/.npm \
+  npm install -g pnpm@${PNPM_VERSION}
+
+# ==============================================================================
+# Dependencies stage - Install and cache dependencies
+# ==============================================================================
+FROM base AS dependencies
+
+# Set working directory
 WORKDIR /app
 
-# Copy the dependency files to the container
-COPY package*.json pnpm-lock.yaml ./
+# Copy package files first for better layer caching
+COPY --chown=node:node package.json pnpm-lock.yaml ./
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile --ignore-scripts
+# Create cache directory and install dependencies with caching
+RUN --mount=type=cache,target=/home/node/.local/share/pnpm,uid=1000,gid=1000 \
+  --mount=type=cache,target=/home/node/.cache/pnpm,uid=1000,gid=1000 \
+  pnpm install --frozen-lockfile --ignore-scripts
 
-# Copy application files to the container
-COPY . .
+# ==============================================================================
+# Build stage - Build the application
+# ==============================================================================
+FROM dependencies AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy source code (use .dockerignore to exclude unnecessary files)
+COPY --chown=node:node . .
 
 # Build the application
-RUN pnpm build
+RUN --mount=type=cache,target=/home/node/.cache,uid=1000,gid=1000 \
+  pnpm build
 
-# Stage 2: Production stage
-FROM node:iron-bookworm-slim
+# ==============================================================================
+# Production dependencies stage - Optimized production install
+# ==============================================================================
+FROM base AS prod-deps
 
-# Install latest version of pnpm
-RUN npm install -g pnpm@latest
+# Set working directory
+WORKDIR /app
 
-# Copy the dependency files to the container
-COPY --from=builder /app/package*.json /app/pnpm-lock.yaml /
+# Copy package files
+COPY --chown=node:node package.json pnpm-lock.yaml ./
 
-# Install dependencies
-RUN pnpm install --frozen-lockfile --ignore-scripts --prod
+# Copy all the dependencies from the dependencies stage
+COPY --from=dependencies --chown=node:node /app/node_modules ./node_modules/
 
-# Copy only the contents of the dist folder from the builder stage to the root of the app directory
-COPY --from=builder /app/dist/ /
+# Prune development dependencies with caching
+RUN --mount=type=cache,target=/home/node/.local/share/pnpm,uid=1000,gid=1000 \
+  --mount=type=cache,target=/home/node/.cache/pnpm,uid=1000,gid=1000 \
+  pnpm prune --prod --ignore-scripts
 
-# Set the environment variable to production
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
+# ==============================================================================
+# Runtime stage - Final production image
+# ==============================================================================
+FROM node:${NODE_VERSION}-bookworm-slim AS runtime
+
+# Set environment variables
+ENV NODE_ENV=production \
+  NODE_OPTIONS="--max-old-space-size=512"
+
+# Copy production dependencies
+COPY --from=prod-deps --chown=node:node /app/node_modules /node_modules/
+
+# Copy package files
+COPY --from=prod-deps --chown=node:node /app/package.json /app/pnpm-lock.yaml /
+
+# Copy built application
+COPY --from=builder --chown=node:node /app/dist /
 
 # Start the application
 ENTRYPOINT ["node", "/index"]
