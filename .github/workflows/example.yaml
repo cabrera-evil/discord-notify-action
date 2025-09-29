@@ -1,10 +1,7 @@
 name: Discord Notify
 
 on:
-  workflow_run:
-    workflows: ['Docker Publish']
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   notify:
