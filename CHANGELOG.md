@@ -1,3 +1,9 @@
+## [1.0.2-beta.1](https://github.com/cabrera-evil/discord-notify-action/compare/v1.0.1...v1.0.2-beta.1) (2025-09-29)
+
+### Bug Fixes
+
+* missing semantic release dep ([9cdbf3d](https://github.com/cabrera-evil/discord-notify-action/commit/9cdbf3d97041187aea0ec5da31a18b1f8df1fa37))
+
 ## [1.0.1](https://github.com/cabrera-evil/discord-notify-action/compare/v1.0.0...v1.0.1) (2025-06-02)
 
 ### Bug Fixes
