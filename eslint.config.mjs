@@ -21,8 +21,8 @@ const compat = new FlatCompat({ baseDirectory: __dirname });
 export default defineConfig([
 	js.configs.recommended,
 	json.configs.recommended,
-	...tseslint.configs.recommended,
-	...compat.config({
+	tseslint.configs.recommended,
+	compat.config({
 		plugins: ['import', 'prettier'],
 		extends: [
 			'plugin:import/recommended',
@@ -33,13 +33,12 @@ export default defineConfig([
 		rules: {
 			'@typescript-eslint/no-explicit-any': 'warn',
 			'@typescript-eslint/no-require-imports': 'off',
-			'import/named': 'off',
+			'@typescript-eslint/no-unused-vars': 'warn',
 			'import/no-unresolved': 'off',
-			'import/extensions': 'off',
-			'import/prefer-default-export': 'off',
-			'import/export': 'off',
-			'no-use-before-define': 'warn',
+			'no-console': 'warn',
 			'no-shadow': 'off',
+			'no-unused-vars': 'off',
+			'no-use-before-define': 'warn',
 		},
 	}),
 	{
@@ -48,7 +47,4 @@ export default defineConfig([
 		},
 	},
 	includeIgnoreFile(gitignorePath),
-	{
-		ignores: ['**/env.d.ts'],
-	},
 ]);

@@ -1,15 +1,27 @@
+# Ignore build output directories
+**/dist/**
+
 # Ignore git hooks
 **/.husky/**
+
+# Ignore node_modules (dependencies)
+**/node_modules/**
 
 # Ignore lock files and configuration files
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
+# Ignore environment files
+*.env*
+
 # Ignore public/static assets and coverage files
 **/public/**
-**/static/**
 **/coverage/**
+**/templates/**
+
+# Ignore Prettier configuration file itself
+.prettierignore
 
 # Ignore Documentation files
 README.md
