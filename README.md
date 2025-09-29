@@ -4,11 +4,9 @@
 
 WARNING:
 
-    DO NOT EDIT "amplify-json/README.md"
+    DO NOT EDIT "README.md"
 
     IT IS AUTO-GENERATED
-
-    (based on Dockerfile, usage example, and entrypoint logic)
 
 ********************************************************************************
 
@@ -146,4 +144,4 @@ notify:
 
 ## License
 
-This project is released under the [MIT License](https://github.com/cabrera-evil/discord-notify-action/blob/master/LICENSE).
+This project is released under the [MIT License](LICENSE).
