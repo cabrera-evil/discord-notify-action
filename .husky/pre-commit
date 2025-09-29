@@ -1,3 +1,37 @@
 #!/usr/bin/env sh
 
+# Exit immediately if a command fails
+set -e
+
+# Check if pnpm is installed
+if ! command -v pnpm >/dev/null 2>&1; then
+	echo "Error: pnpm is not installed. Please install pnpm to continue." >&2
+	exit 1
+fi
+
+# Check if ggshield is installed
+if ! command -v ggshield >/dev/null 2>&1; then
+	echo "Error: ggshield is not installed. Please install ggshield to continue." >&2
+	exit 1
+fi
+
+# Check if snyk is installed
+if ! command -v snyk >/dev/null 2>&1; then
+	echo "Error: snyk is not installed. Please install snyk to continue." >&2
+	exit 1
+fi
+
+# Run linters on staged files
+echo "Running linters on staged files..."
 pnpm lint-staged
+
+# Run ggshield to scan for secrets
+echo "Scanning for secrets with ggshield..."
+ggshield secret scan pre-commit "$@"
+
+# Run snyk to check for vulnerabilities
+echo "Checking for vulnerabilities with snyk..."
+snyk test --severity-threshold=high
+
+# If all checks pass
+echo "Pre-commit checks passed successfully."

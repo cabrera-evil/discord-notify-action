@@ -52,12 +52,12 @@
 		"test:cov": "jest --coverage",
 		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
 		"check-types": "tsc --project tsconfig.build.json --noEmit",
-		"prepare": "husky"
+		"prepare": "node .husky/install.mjs"
 	},
 	"dependencies": {
 		"@actions/core": "^1.11.1",
 		"@actions/github": "^6.0.1",
-		"axios": "0.29.0",
+		"axios": "1.12.2",
 		"joi": "^17.13.3",
 		"lodash": "4.17.21"
 	},
