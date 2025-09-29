@@ -1,6 +1,4 @@
 name: Semantic Release
-description: |
-  Automated release process using Semantic Release
 
 on:
   push:
@@ -45,5 +43,5 @@ jobs:
     needs: release
     uses: cabrera-evil/workflows/.github/workflows/publish-docker.yaml@master
     with:
-      docker_image: ${{ github.event.repository.name }}
+      label: ${{ github.event.repository.name }}
     secrets: inherit
